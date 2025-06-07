@@ -86,14 +86,14 @@ HeapNode Heap::extractMax()
         throw std::underflow_error("Heap underflow");
 
     HeapNode root = array[0];
+    size--;
 
-    if (size == 1) {
+    if (size == 0) {
         array[0].setID(0);
         array[0].setPRI(0);
         return root;
     }
     
-    size--;
     array[0] = array[size];
     array[size].setID(0);
     array[size].setPRI(0);
@@ -122,10 +122,6 @@ void Heap::updateNode(int id, int newPRI)
 
 void Heap::deleteNode(int i)
 {
-    if (i >= size) {
-        throw std::out_of_range("Invalid index");
-    }
-
     size--;
     array[i] = array[size];
     array[size].setID(0);
@@ -135,6 +131,10 @@ void Heap::deleteNode(int i)
 
 void Heap::printHeap() const
 {
+    if (size == 0) {
+        std::cout << "Heap is empty" << std::endl;
+        return;
+    }
     std::cout << std::endl << "ID" << "    " << "PRI" << std::endl;
     for (int i = 0; i < size; i++) {
         std::cout << array[i].getID() << "      " << array[i].getPRI() << std::endl;

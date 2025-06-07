@@ -8,7 +8,7 @@ private:
     int priority;
     int ID;
 public:
-    HeapNode() {};
+    HeapNode() { ID = priority = 0; }
     HeapNode(int id, int PRI);
 
     void setPRI(int p) { priority = p; }

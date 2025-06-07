@@ -53,11 +53,18 @@ int main()
 			pos = command.find(" ", pos);
 			desc = command.substr(_pos, pos - _pos);
 
-			root = tree.insert(root, tree.newNode(id, pri, name, time, desc));
+			root = tree.insert(root, tree.newNode(id, name, time, desc));
 			heap.insert(id, pri);
 		}
 		else if (command == "process") {
-			HeapNode node = heap.extractMax();
+			HeapNode node;
+			try {
+				node = heap.extractMax();
+			}
+			catch (std::underflow_error e) {
+				cout << "There is no request for processing" << endl;
+				continue;
+			}
 			root = tree.delNode(root, node.getID());
 		}
 		else if (command.substr(0, 6) == "search") {
@@ -68,11 +75,14 @@ int main()
 
 			Node* node = tree.search(root, id);
 
-			cout << "ID" << "          " << node->getID() << endl;;
-			cout << "Priority" << "    " << node->getPRI() << endl;
-			cout << "Name" << "        " << node->getName() << endl;
-			cout << "Time" << "	       " << node->getTime() << endl;
-			cout << "Description" << " " << node->getDesc() << endl;
+			if (node != nullptr) {
+				cout << "ID" << "          " << node->getID() << endl;;
+				cout << "Name" << "        " << node->getName() << endl;
+				cout << "Time" << "	       " << node->getTime() << endl;
+				cout << "Description" << " " << node->getDesc() << endl;
+			}
+			else
+				cout << "Not such a request with the ID " << id << " found" << endl;
 		}
 		else if (command.substr(0, 6) == "update") {
 			pos = 7;
@@ -93,8 +103,10 @@ int main()
 			tree.preorder(root);
 			cout << endl;
 		}
-		else if (command == "exit")
+		else if (command == "exit") {
+			cout << "goodBye" << endl;
 			break;
+		}
 		else
 			cout << "command not found" << endl;
 	}

@@ -2,23 +2,22 @@
 
 #include "BST.h"
 
-Node* BST::newNode(int id, int PRI, string name, string time, string desc)
+Node* BST::newNode(int id, string name, string time, string desc)
 {
 	Node* temp = new Node();
 
 	temp->setID(id);
-	temp->setPRI(PRI);
 	temp->setName(name);
 	temp->setTime(time);
 	temp->setDesc(desc);
-	temp->setRight(NULL);
-	temp->setLeft(NULL);
+	temp->setRight(nullptr);
+	temp->setLeft(nullptr);
 
 	return temp;
 }
 Node* BST::insert(Node* root, Node* node) 
 {
-	if (root == NULL) {
+	if (root == nullptr) {
 		root = node;
 	}
 	else if (node->getID() < root->getID())
@@ -31,7 +30,7 @@ Node* BST::insert(Node* root, Node* node)
 
 void BST::preorder(Node* node) 
 {
-	if (node != NULL) {
+	if (node != nullptr) {
 		std::cout << node->getID() << " ";
 		preorder(node->getLeft());
 		preorder(node->getRight());
@@ -40,8 +39,8 @@ void BST::preorder(Node* node)
 
 Node* BST::search(Node* root, int id) 
 {
-	if (root == NULL)
-		return NULL;
+	if (root == nullptr)
+		return nullptr;
 	if (id == root->getID()) {
 		return root;
 	}
@@ -52,7 +51,7 @@ Node* BST::search(Node* root, int id)
 		search(root->getRight(), id);
 	}
 	else
-		return NULL;
+		return nullptr;
 }
 
 Node* BST::getSuccessor(Node* curr) 

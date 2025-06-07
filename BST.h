@@ -8,7 +8,6 @@ using namespace std;
 class Node {
 private:
 	int ID;
-	int priority;
 	string name;
 	string time;
 	string description;
@@ -17,7 +16,6 @@ private:
 	Node* right;
 public:
 	void setID(int id) { ID = id; }
-	void setPRI(int PRI) { priority = PRI; }
 	void setName(string n) { name = n; }
 	void setTime(string t) { time = t; }
 	void setDesc(string desc) { description = desc; }
@@ -25,7 +23,6 @@ public:
 	void setRight(Node* r) { right = r; }
 
 	int getID() const { return ID; }
-	int getPRI() const { return priority; }
 	string getName() const { return name; }
 	string getTime() const { return time; }
 	string getDesc() const { return description; }
@@ -37,7 +34,7 @@ class BST {
 private:
 	Node* getSuccessor(Node* curr);
 public:
-	Node* newNode(int id, int PRI, string name, string time, string desc);
+	Node* newNode(int id, string name, string time, string desc);
 	Node* insert(Node* root, Node* node);
 	Node* search(Node* root, int id);
 	Node* delNode(Node* root, int id);
